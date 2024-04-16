@@ -47,10 +47,10 @@ Avaluació pràctica 2.
 Objectius Pràctica
 -------------------
 
-####Back-End: 
+#### Back-End: 
 * Crear aplicació CRUD amb autentificació per a gestionar (CRUD: Create, Read, Update i Delete) de la part de model d'aplicació 
 
-####Front-End: 
+#### Front-End: 
 L'aspecte de l'aplicació ha de ser semblant en aquest:
 
 - **Vista LOG IN**
