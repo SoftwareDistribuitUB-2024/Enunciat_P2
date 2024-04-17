@@ -97,6 +97,11 @@ Fixeu-vos que la migració defineix dos mètodes:
 * **upgrade:** Modificar la base de dades afegint una nova taula team
 * **downgrade:** Desfer aquests canvis, eliminant la taula team
 
+Ara ja només ens cal aplicar aquesta migració utilitzant
+
+```bash
+alembic upgrade head
+```
 
 ### Exercici 4: Creació endpoints de manipulació 
 
