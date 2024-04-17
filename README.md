@@ -4,7 +4,7 @@ date: Abril 2024
 title: Pràctica 2 - FastAPI and Vue application (Software distribuït)
 ---
 
-# Enunciat_P2
+# Enunciat Pràctica 2
 
 Introducció
 ============
@@ -44,7 +44,7 @@ Avaluació pràctica 2.
 - 70% Lliurament final: 20% Sessió de Test, 50% codi final, 30% Memòria progrès.
 
 
-Objectius Pràctica
+Objectius de la Pràctica
 -------------------
 
 #### Back-End: 
@@ -74,93 +74,11 @@ Calendari
 ==========
 
 
-|  Sessió  |  Data | Tema  |  Guia | Slides |
-|---|---|---|---|---|
-|  1 | 17/04/24 |  Backend i Deplegament| Creació Models i Endpoints |
+|  Sessió  |  Data | Tema  |  Guia | Enllaços |
+|---|---|---|---|----------|
+|  1 | 17/04/24 |  Backend i Deplegament| Creació Models i Endpoints | [Sessio 1](./Sessio_1.md)
 |  2 | 24/04/24 | Frontend  | Creació del Frontend  | 
 |  3 | 08/05/24  | Seguretat |  Autenticació i protecció d'endpoints| 
 |  4 | 22/05/24  |  Depuració, Testing i Performance per a múltiples usuaris | Testing i Depuració   | 
 | 5  | 29/05/24  | Sessió de Testing | Guia Sessió de testing |
-
-
-
-Sessió 1
-=========
-17 i 18 d'Abril de 2024
-
-### Objectius
-* Entendre FastAPI
-* Llegir i Entendre el Template d'aplicació web que us donem
-* Llegir i Entendre la Guia que us donem.
-* Solucionar els exercicis de la Guia adaptats al template que us doenm 
-
-### Excercicis
-
-1. Adapteu el mètode `@app.get("/team/{team_name}")`  per a que funcioni amb el model anterior.
-
-2. Escriviu el mètode DELETE que elimini un equip de la llista d'equips. Torneu un missatge indicant si aquest usuari s'ha suprimit o no i el codi corresponent.
-
-3. Escriviu el mètode PUT que, si no existeix aquest equip, crea un equip nou i l'afegeix a la llista d'equips. En cas contrari, modifica els valors de l'equip amb aquest identificador amb la informació del cos de la sol·licitud del PUT (aquesta informació pot ser completa o parcial!). Retorna l'equip creat o modificat.
-
-4.  Escriviu els mètodes GET, POST, DELETE i PUT per a un model anomenat Competition amb la URL:
-
-        '/competitions/
-    A sota teniu exemples de competicions, definiu el model Pydantic segons els exemples.
-
-5.  Escriviu els mètodes GET, POST, DELETE i PUT per a un model anomenat Match amb la URL:
-
-        '/matches/'
-
-    A sota teniu exemples de competicions, definiu el model Pydantic segons els exemples.
-
-6. Feu els mètodes GET per a competicions i matches donat l'ID. 
-    
-7. Proveu i comproveu tots els mètodes desenvolupats amb `requests` o una altra eina de prova d'APIs.
-
-8. Feu un test per a cada mètode desenvolupat i proveu que tot funciona correctament.
-
-``` python
-competitions = [
-    {'id': 0,
-    'name': "Women's European Championship",
-    'category': 'Senior',
-    'sport': 'Volleyball',
-    'teams': []},
-    {'id': 1,
-    'name': "1st Division League",
-    'category': 'Junior',
-    'sport': 'Football',
-    'teams': []},
-    {'id': 2,
-    'name': "Women's Copa Catalunya",
-    'category': 'Senior',
-    'sport': 'Basketball',
-    'teams': []},
-    {'id': 3,
-    'name': "1st Division League",
-    'category': 'Junior',
-    'sport': 'Futsal',
-    'teams': []}
-]
-
-teams = [
-    {'name': "CV Vall D'Hebron",
-     'country': 'Spain'},
-    {'name': 'CE Sabadell',
-     'country': 'Spain'},
-    {'name': 'Club Juventut Les Corts',
-     'country': 'Spain'},
-    {'name': 'Volei Rubi',
-     'country': 'Spain'}
-]
-
-matches = [
-    {'id': 0,
-     'local': "CV Vall D'Hebron",
-     'visitor': 'Volei Rubi',
-     'date': '2022-07-03',
-     'price': 15.20}
-]
-``` 
-
 
