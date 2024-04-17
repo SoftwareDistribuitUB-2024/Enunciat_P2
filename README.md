@@ -76,7 +76,7 @@ Calendari
 
 |  Sessió  |  Data | Tema  |  Guia | Enllaços |
 |---|---|---|---|----------|
-|  1 | 17/04/24 |  Backend i Deplegament| Creació Models i Endpoints | [Sessio 1](./Sessio_1.md)
+|  1 | 17/04/24 |  Backend i Deplegament| Creació Models i Endpoints | [Enunciat](./Sessio_1.md) / [Resum](./slides/SD2024_P2_Sessio1.pdf)
 |  2 | 24/04/24 | Frontend  | Creació del Frontend  | 
 |  3 | 08/05/24  | Seguretat |  Autenticació i protecció d'endpoints| 
 |  4 | 22/05/24  |  Depuració, Testing i Performance per a múltiples usuaris | Testing i Depuració   | 
