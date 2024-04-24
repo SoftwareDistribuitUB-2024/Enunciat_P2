@@ -89,7 +89,6 @@ Hem vist com executar un projecte. Ara veurem com crear el nostre propi componen
 <template>
     <router-view/>
 </template>
-
 ```
 
 A més, creeu un component nou anomenat `Matches.vue` a la carpeta de components. En aquest fitxer, copieu i enganxeu el codi següent:
@@ -112,13 +111,12 @@ export default {
 }
 
 </script>
-
 ```
 
 Com podeu veure aquí, tenim dos blocs anomenats "template" i "script". Com hem esmentat anteriorment, el primer bloc correspon a la visualització en html i el segon pertany al codi JavaScript. A "return" podem declarar les variables que utilitzarem al codi. També podeu interactuar incloent-hi les referències de codi a la plantilla html.
 Paral·lelament, aneu a `index.js` per encaminar el nou component:
 
-```html
+```js
 import Vue from 'vue'
 import Router from 'vue-router'
 import Matches from '@/components/Matches'
@@ -148,26 +146,29 @@ Bootstrap
 Bootstrap (<https://www.w3schools.com/whatis/whatis_bootstrap.asp>) és el framework CSS més popular per al desenvolupament de llocs web responsius i per a mòbils. Conté plantilles de disseny basades en CSS i JavaScript per a tipografia, formularis, botons, navegació i altres components de la interfície.
 
 
-Per instal·lar-lo al nostre projecte, executeu la comanda següent en la línia d'ordres:
+Per instal·lar-lo al nostre projecte, executeu la comanda següent en la línia d'ordres (dins el directori ```frontend```):
 
-	npm install --save bootstrap-vue
+	npm install --save bootstrap-vue bootstrap
 	
-A més, descarregueu els fitxers compilats [aquí](https://getbootstrap.com/docs/4.0/getting-started/download/). Extreu els fitxers a una carpeta nova anomenada bootstrap dins del vostre projecte:
-
-![image](img/vue_bootstrap.png)
 
 Després de la instal·lació, configureu el fitxer `main.js` important el Bootstrap:
 
-
-```html
-import BootstrapVue from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.css'
+```js
 import Vue from 'vue'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import App from './App.vue'
 import router from './router'
 
-Vue.use(BootstrapVue)
+// Importar els fitxers CSS de Bootstrap i BootstrapVue (l'ordre és important)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 Vue.config.productionTip = false
+
+// Fem que el Boostrap estigui disponible a tot el projecte
+Vue.use(BootstrapVue)
+// Opcionalment també podem instal·lar les icones
+Vue.use(IconsPlugin)
 
 /* eslint-disable no-new */
 new Vue({
@@ -176,7 +177,6 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
-
 ```
 
 Ara podem consumir les plantilles Bootstrap predefinides.

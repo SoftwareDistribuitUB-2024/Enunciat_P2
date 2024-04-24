@@ -1,5 +1,5 @@
-Connectant Vue i FastAPI
-=========
+# Connectant Vue i FastAPI
+
 
 Ara hem de connectar el Framework de Frontend de VUE (node.js) amb el Framework de Backend de FastAPI (python). Però primer haurem de permetre que es puguin fer "requests" des del client (javascript del navegador) al servidor web. Per això haurem de permetre-ho en el nostre backend de FAST-API.
 
