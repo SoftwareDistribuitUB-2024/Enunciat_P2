@@ -36,7 +36,17 @@ Una aplicació que també us pot facilitar aquest tipus de proves és [Postman](
 
 - Afegir usuari
   - Crides curl per llistar usuaris
+
+```bash
+curl -X "GET" "http://127.0.0.1:8000/api/v1/users/?skip=0&limit=100" -H "accept: application/json"
+``` 
+
   - Crida curl per afegir usuari
+
+```bash
+curl -X "POST" "http://127.0.0.1:8000/api/v1/users/" -H "accept: application/json" -H "Content-Type: application/json" -d "{\"full_name\": \"John Smith\", \"password\": \"my_password\", \"email\": \"admin@p2.sd.ub.edu\"}"
+```
+
 - Comprovar que el password no és llegible
 - Fer revisar què passa quan es crea un usuari i vincular amb guia seguretat dades
 
@@ -44,6 +54,26 @@ Una aplicació que també us pot facilitar aquest tipus de proves és [Postman](
 
 - Fer revisar endpoint de login
 - Fer crida curl per obtenir JWT
+
+```bash
+curl -X "POST" "http://127.0.0.1:8000/api/v1/login/access-token" -H "accept: application/json" -H "Content-Type: application/x-www-form-urlencoded" -d "username=admin@p2.sd.ub.edu&password=my_password"
+```
+
+Teniu un mètode a l'API per provar els tokens. Primer, crideu a aquest mètode sense pasar cap token, per tant, sense
+estar autenticat:
+
+```bash
+curl -X "POST" "http://127.0.0.1:8000/api/v1/login/test-token" -H "accept: application/json"
+```
+
+Per fer una crida autenticada amb el token anterior, cal afegir-lo en forma 
+de capçalera:
+
+```bash
+curl -X "POST" "http://127.0.0.1:8000/api/v1/login/test-token" -H "accept: application/json" -H "Authorization: Bearer **<token>**"
+```
+on **<token>** és el valor obtingut en la crida anterior.
+
 
 ### Exercici 3: Protecció endpoints
 
