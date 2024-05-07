@@ -74,11 +74,11 @@ Calendari
 ==========
 
 
-|  Sessió  |  Data | Tema  |  Guia | Enllaços |
-|---|---|---|---|----------|
-| 1 | 17/04/24 |  Backend i Deplegament| Creació Models i Endpoints | [Enunciat](./Sessio_1.md) / [Resum](./slides/SD2024_P2_Sessio1.pdf)
-| 2 | 24/04/24 | Frontend  | Creació del Frontend  | [Enunciat](./Sessio_2.md) / [Resum](./slides/SD2024_P2_Sessio2.pdf)
-| 3 | 08/05/24  | Seguretat |  Autenticació i protecció d'endpoints| 
-| 4 | 22/05/24  |  Depuració, Testing i Performance per a múltiples usuaris | Testing i Depuració   | 
-| 5  | 29/05/24  | Sessió de Testing | Guia Sessió de testing |
+|  Sessió  |  Data | Tema  | Guia                                 | Enllaços |
+|---|---|---|--------------------------------------|----------|
+| 1 | 17/04/24 |  Backend i Deplegament| Creació Models i Endpoints           | [Enunciat](./Sessio_1.md) / [Resum](./slides/SD2024_P2_Sessio1.pdf)
+| 2 | 24/04/24 | Frontend  | Creació del Frontend                 | [Enunciat](./Sessio_2.md) / [Resum](./slides/SD2024_P2_Sessio2.pdf)
+| 3 | 08/05/24  | Seguretat | Autenticació i protecció d'endpoints | [Enunciat](./Sessio_3.md) / [Resum](./slides/SD2024_P2_Sessio3.pdf)
+| 4 | 22/05/24  |  Depuració, Testing i Performance per a múltiples usuaris | Testing i Depuració                  | 
+| 5  | 29/05/24  | Sessió de Testing | Guia Sessió de testing               |
 
