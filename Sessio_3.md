@@ -103,28 +103,193 @@ on **<token>** és el valor obtingut en la crida anterior. Comprova el contingut
 
 ### Exercici 3: Protecció endpoints
 
-- Protegir endpoint creació usuaris
+Obre el mòdul ```app.api.routes.users``` i fixa't en el paràmetre **dependencies** que teniu
+comentat tant en el mètode **read_users** com en el mètode **create_user**. Aquest paràmetre permet limitar
+l'accés a determinats mètodes. En aquest cas, el mètode ```get_current_active_superuser``` exigeix
+que per accedir a aquest mètode l'usuari estigui actiu i sigui administrador. Això correspon a dir que els camps
+**is_active** i **is_superuser** del model **User** estiguin actius.
 
-Podeu trobar més informació sobre la protecció dels end-points a [l'apartat de seguretat de fastAPI](https://fastapi.tiangolo.com/tutorial/security/)
-- Verificar que ara ja no funciona la crida de l'exercici 1
-- Explicar com passar JWT
-- Crida curl amb token per crear un nou usuari, i veure que si que ara si que funciona.
+Anem a provar el seu funcionament. Primer de tot, verifica que pots llistar tots els usuaris amb al comanda:
+
+```bash
+curl -X "GET" "http://127.0.0.1:8000/api/v1/users/" -H "accept: application/json"
+``` 
+
+Ara elimina el comentari en el mètode **read_users**. Reinicia el servidor i torna a executar la comanda:
+
+```bash
+curl -X "GET" "http://127.0.0.1:8000/api/v1/users/" -H "accept: application/json"
+``` 
+
+Què ha passat? Has pogut accedir-hi? Repeteix els passos de l'exercici 2 per obtenir un token d'accés. Ara fes
+la crida amb aquest token:
+
+```bash
+curl -X "GET" "http://127.0.0.1:8000/api/v1/users/" -H "accept: application/json" -H "Authorization: Bearer **<token>**"
+```
+on **<token>** és el token d'accés. Modifica els camps **is_active** i **is_superuser** per
+veure la resposta en les diferents variacions.
+
+Repeteix els mateixos passos per al mètode **create_user**.
+
 
 ### Exercici 4: Implementació autenticació al frontend
 
-- Mostrar captura pantalla amb formular autenticació
-- Explicar com afegir JWT a axios
+Ara que ja tenim el backend protegit, caldrà modificar el frontend perquè ho tingui en compte. 
+Comencem pel disseny del component. En primer lloc, creeu un nou component anomenat **Login** en el fitxer
+```components/Login.vue```. 
+
+```javascript
+<template>
+  <form>
+    <div class="form-label-group">
+      <label for="inputEmail">Username</label>
+      <input type="text" id="inputUsername" class="form-control"
+      placeholder="Username" required autofocus v-model="username">
+    </div>
+    <div class="form-label-group">
+      <br>
+      <label for="inputPassword">Password</label>
+      <input type="password" id="inputPassword" class="form-control"
+      placeholder="Password" required v-model="password">
+    </div>
+    <div>
+      <b-button @click="login_user" variant="primary">Sign In</b-button>
+      <b-button @click="register_user" variant="success">Create Account</b-button>
+      <b-button @click="back_matches" variant="secondary">Back To Matches</b-button>
+    </div>
+  </form>
+</template>
+
+<script>
+export default {
+  name: 'Login',
+  data () {
+    return {
+      username: null,
+      password: null,
+      token: null,
+      is_authenticated: false
+    }
+  },
+  methods: {
+    login_user (event) {
+    },
+    register_user (event) {
+    },
+    back_matches (event) {
+    }
+  }
+}
+</script>
+```
+Registreu la ruta dins el fitxer ```router/index.js```:
+
+```javascript
+import Vue from 'vue'
+import Router from 'vue-router'
+import Shows from '@/components/Shows.vue'
+import Login from '@/components/Login.vue'
+
+Vue.use(Router)
+
+export default new Router({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes: [
+    {
+      path: '/',
+      name: 'Matches',
+      component: Matches
+    },
+    {
+      path: '/userlogin',
+      name: 'Login',
+      component: Login
+    }
+  ]
+})
+```
+
+Un cop l'estructura estigui llesta, podem dissenyar la vista d'inici de sessió com per exemple:
+
+![image](figures/sessio-5_login.png)
+
+Com podeu veure, tenim dos textos d’entrada i tres botons.
+
+Afegeix el següent codi a l'acció associada al botó "Sign In":
+
+```javascript
+login_user () {
+  const parameters = 'username=' + this.username + '&password=' + this.password
+  const config = {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  }
+  const path = 'http://localhost:8000/api/v1/login/access-token'
+  axios.post(path, parameters, config)
+    .then((res) => {
+      this.logged = true
+      this.token = res.data.token.access_token
+      this.$router.push({ path: '/', query: { username: this.username, logged: this.logged, token: this.token } })
+    })
+    .catch((error) => {
+      // eslint-disable-next-line
+      console.error(error)
+      alert('Username or Password incorrect')
+    })
+}
+```
+Recorda a importar el component 'axios' amb:
+
+```javascript
+import axios from 'axios'
+```
+
+Observem que estem fent servir una eina per canviar la ruta actual del component un altre:
+
+```javascript
+this.$router.push({ path: '/', query: { username: this.username, logged: this.logged, token: this.token } })
+```
+
+Els paràmetres que passem ens permeten donar a la vista principal la informació sobre l’usuari. "username" conté el nom d'usuari actual, "logged" és un booleà que mostra si l'usuari ha iniciat la sessió correctament i "token" és la string del token per a poder enviar requests autoritzades.
+
+Per consumir la informació de la consulta des de la vista `Matches`, hem d'inicialitzar els atributs a data i podem utilitzar les línies següents a `created()`:
+
+```javascript
+created () {
+  this.logged = this.$route.query.logged === 'true'
+  this.username = this.$route.query.username
+  this.token = this.$route.query.token
+  if (this.logged === undefined) {
+    this.logged = false
+  }
+```
+        
+### Exercici 5: Implementació autenticació al frontend
+
+A partir de l'exemple de l'exerercici 4, crea un nou servei **AuthService** a l'estil del component **TeamService** que 
+vàrem crear a la sessió 2. Mou l'obtenció del token a aquest servei.
 
 ## Tasques fora del laboratori
 
 ### Tasca 1: Protegir gestió dades de l'aplicació
+
+Afegeix protecció a l'aplicació per garantir que:
+
 - Només els administradors poden crear competicions i equips
 - Només els organitzadors d'una competició i els administradors poden crear partits
 - Qualsevol usuari registrat ha de poder comprar entrades
 
 ### Tasca 2: Protegir dades
-- Modifica la teva aplicació per tal que els diners disponibles a un compte es guardin de forma encriptada.
+
+Modifica la teva aplicació per tal que els diners disponibles a un compte es guardin de forma encriptada a la base de dades.
 
 ### Tasca 3: [Opcional] Transaccions a la base de dades
-- Assegurar concurrència respecte nombre entrades i salari disponible. 
+Modifica el backend per tal d'introduir transaccions en la compra d'entrades i salari. Podeu trobar la informació en [aquesta guia](https://docs.sqlalchemy.org/en/20/orm/session_transaction.html). 
+
+### Tasca 4: [Opcional] Ús d'emmagatzematge local
+Modifica el servei d'autenticació per tal que el token es guardi en l'emmagatzematge local, evitant haver-lo d'anar passant com a paràmetre.
+Teniu la informació en aquest [enllaç](https://es.vuejs.org/v2/cookbook/client-side-storage).
 
