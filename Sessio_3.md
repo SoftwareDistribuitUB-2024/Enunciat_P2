@@ -231,7 +231,7 @@ login_user () {
   axios.post(path, parameters, config)
     .then((res) => {
       this.logged = true
-      this.token = res.data.token.access_token
+      this.token = res.data.access_token
       this.$router.push({ path: '/', query: { username: this.username, logged: this.logged, token: this.token } })
     })
     .catch((error) => {
