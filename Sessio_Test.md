@@ -51,7 +51,7 @@ indicant en el títol de l'issue quin grup te l'ha reportat.
 
 ### Tasca 1: Introducció de dades
 
-Crea un **fitxer amb les crides CURL** necessàries per afegir aquestes dades, i lliura'l junt amb la pràctica.
+Crea un **fitxer amb les crides CURL** necessàries per afegir les dades de prova de l'exercici 1, i lliura'l junt amb la pràctica.
 
 ### Tasca 2: Anàlitzar i solucionar els problemes trobats
 
