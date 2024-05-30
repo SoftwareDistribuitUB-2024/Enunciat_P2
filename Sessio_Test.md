@@ -79,8 +79,16 @@ A més a més, cal afegir els següents partits, afegint el límit en el nombre 
 
 ### Exercici 3: Realització de les proves creuades
 
-Durant aquesta sessió utilitzarem l'eina [Uptitude](https://uptitude.netlify.app/). Caldrà que indiquis com a lliurament l'URL de la documentació, 
-especificat a l'exercici 1.
+Durant aquesta sessió utilitzarem l'eina [Uptitude](https://uptitude.netlify.app/). Podeu entrar a la plataforma utilitzant el vostre **correu i el NIUB** com a contrasenya.
+Com a lliurament en aquesta plataforma caldrà que pugis un **fitxer TXT** amb la següent informació:
+
+```text
+Grup
+URL documentació (la de l'exercici 1 d'aquesta guia)
+Nom i cognoms dels membres del grup
+```
+**NOTA:** En cas que tinguis problemes amb el desplegament a Render.com, afegeix en aquest fitxer la IP del teu ordinador,
+i arranca la teva pràctica en el teu ordinador.
 
 Si trobes errors durant la prova de les pràctiques dels teus companys, cal que ho indiquis a la teva memòria, i que els
 hi comuniquis a ells.
